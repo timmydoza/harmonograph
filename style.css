@@ -1,0 +1,8 @@
+path {
+  stroke: black;
+  fill: none;
+}
+
+svg {
+  overflow: visible !important;
+}
