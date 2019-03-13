@@ -19,8 +19,8 @@ const y = d3
   .domain([-2, 2])
   .range([0, 500]);
 
-const xFreq = 2;
-const yFreq = 2;
+const xFreq = 1;
+const yFreq = 1;
 
 let e = 0;
 const base = d3
@@ -28,17 +28,14 @@ const base = d3
   .map((d, i) => [Math.cos(rad(d) / xFreq), Math.sin(rad(d) / yFreq), d]);
 
 const data = base.map(([x, y, d], i) => {
-  cos = Math.cos(rad(d)*1),
-  sin = Math.sin(rad(d)*1),
+  const ratio = 10/1
+  cos = Math.cos(rad(d)*ratio) / (ratio),
+  sin = Math.sin(rad(d)*ratio) / (ratio),
   nx = (cos + x),
   ny = (sin + y);
 return [nx, ny];
 // return [x,y]
 });
-
-// const data = d3
-//   .range(360 * xFreq * yFreq + 1)
-//   .map(d => [Math.sin(rad(d) / xFreq) * Math.sin(rad(d)), Math.sin(rad(d) / yFreq) * Math.cos(rad(d))]);
 
 const line = d3
   .line()
