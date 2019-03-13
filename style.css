@@ -1,4 +1,30 @@
 body {
+}
+
+.container {
+  width: calc(100% - 300px);
+}
+
+.controlContainer {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 300px;
+  background: #ddd;
+  padding: 1em;
+}
+
+.canvasContainer {
   display: flex;
   justify-content: center;
+  padding: 20px;
+}
+
+input[type='range'] {
+  width: 100%;
+}
+
+.control {
+  padding: 0.4em 0;
 }
