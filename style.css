@@ -1,8 +1,4 @@
-path {
-  stroke: black;
-  fill: none;
-}
-
-svg {
-  overflow: visible !important;
+body {
+  display: flex;
+  justify-content: center;
 }

@@ -1,72 +1,55 @@
 const context = document.querySelector('canvas').getContext('2d');
+
+const size = window.innerHeight < window.innerWidth ? window.innerHeight : window.innerWidth;
+
 const canvas = d3
   .select('canvas')
-  .attr('width', 500)
-  .attr('height', 500);
+  .attr('width', size)
+  .attr('height', size);
 
-const rad = d3
-  .scaleLinear()
-  .domain([0, 180])
-  .range([0, Math.PI]);
-
-const x = d3
+const scale = d3
   .scaleLinear()
   .domain([-2, 2])
-  .range([0, 500]);
+  .range([0, size]);
 
-const y = d3
-  .scaleLinear()
-  .domain([-2, 2])
-  .range([0, 500]);
-
-const xFreq = 1;
-const yFreq = 1;
-
-let e = 0;
-const base = d3
-  .range(0, 3 * 360 * xFreq * yFreq + 1, 2)
-  .map((d, i) => [Math.cos(rad(d) / xFreq), Math.sin(rad(d) / yFreq), d]);
-
-const data = base.map(([x, y, d], i) => {
-  const ratio = 10/1
-  cos = Math.cos(rad(d)*ratio) / (ratio),
-  sin = Math.sin(rad(d)*ratio) / (ratio),
-  nx = (cos + x),
-  ny = (sin + y);
-return [nx, ny];
-// return [x,y]
-});
+const xFreq = 3;
+const yFreq = 2;
+const zFreq = 3.01;
+const invert = false;
+const radial = true;
+const speed = 2;
 
 const line = d3
   .line()
-  .x(d => x(d[0]))
-  .y(d => y(d[1]));
+  .x(d => scale(d[0]))
+  .y(d => scale(d[1]));
 
-context.lineWidth = 1;
-function update() {
+function update(min, max) {
+  const data = d3.range(min, max).map(d => {
+    const theta = (d / 180) * Math.PI;
+    let x = Math.cos(theta * xFreq);
+    let y = Math.sin(theta * yFreq);
+
+    if (radial) {
+      x += Math.cos(theta * zFreq);
+      y += Math.sin(theta * zFreq);
+
+      if (invert) {
+        x /= zFreq;
+        y /= zFreq;
+      }
+    }
+
+    return [x, y];
+  });
+
+  context.beginPath();
   line.context(context)(data);
   context.stroke();
 }
 
-update();
-
-// const circle = svg.append('circle').attr('r', 5);
-
-// transition();
-
-// function transition() {
-//   circle
-//     .transition()
-//     .duration(2000)
-//     .ease(d3.easeLinear)
-//     .attrTween('transform', translateAlong(path.node()))
-//     .on('end', transition);
-// }
-
-// function translateAlong(path) {
-//   var l = path.getTotalLength();
-//   return (d, i, a) => t => {
-//     var p = path.getPointAtLength(t * l);
-//     return 'translate(' + p.x + ',' + p.y + ')';
-//   };
-// }
+let last = 0;
+const timer = d3.timer(elapsed => {
+  update(last * speed, elapsed * speed + 1);
+  last = elapsed;
+});
