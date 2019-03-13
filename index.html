@@ -27,38 +27,44 @@
         </div>
         <div class="control">
           <label>
+            Lock to Integer
+            <input type="checkbox" v-model="settings.integer" />
+          </label>
+        </div>
+        <div class="control">
+          <label>
             X Frequency: {{ settings.xFreq }}
-            <input type="range" v-model="settings.xFreq" step="0.1" />
+            <input type="range" v-model="settings.xFreq" step="0.01" />
           </label>
         </div>
         <div class="control">
           <label>
             Y Frequency: {{ settings.yFreq }}
-            <input type="range" v-model="settings.yFreq" step="0.1" />
+            <input type="range" v-model="settings.yFreq" step="0.01" />
           </label>
         </div>
         <div class="control">
           <label>
             Z Frequency: {{ settings.zFreq }}
-            <input type="range" v-model="settings.zFreq" step="0.1" />
+            <input type="range" v-model="settings.zFreq" step="0.01" />
           </label>
         </div>
         <div class="control">
           <label>
             Invert Rotary Amplitude
-            <input type="checkbox" v-model="settings.invery" />
+            <input type="checkbox" v-model="settings.invert" />
           </label>
         </div>
         <div class="control">
           <label>
             Render Speed: {{ settings.speed }}
-            <input type="range" v-model="settings.speed" step="0.1" />
+            <input type="range" v-model="settings.speed" step="0.01" />
           </label>
         </div>
         <div class="control">
           <label>
             Decay: {{ settings.decay }}
-            <input type="range" v-model="settings.decay" step="0.1" />
+            <input type="range" v-model="settings.decay" step="0.01" />
           </label>
         </div>
       </div>
