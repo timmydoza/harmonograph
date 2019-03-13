@@ -9,13 +9,8 @@ function Harmonograph() {
       let y = Math.sin(theta * yFreq);
 
       if (type === 'rotary') {
-        x += Math.cos(theta * zFreq);
-        y += Math.sin(theta * zFreq);
-
-        if (invert) {
-          x /= zFreq;
-          y /= zFreq;
-        }
+        x -= invert ? Math.cos(theta * zFreq) / zFreq : Math.cos(theta * zFreq);
+        y += invert ? Math.sin(theta * zFreq) / zFreq : Math.sin(theta * zFreq);
       }
 
       return [x, y];
