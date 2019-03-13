@@ -2,13 +2,15 @@ const app = new Vue({
   el: '.container',
   data: {
     settings: {
-      xFreq: 3,
+      xFreq: 2,
       yFreq: 2,
+      xyLock: false,
       zFreq: 3.01,
       invert: false,
       type: 'rotary',
       speed: 0.2,
-      decay: 0
+      decay: 0,
+      rotaryType: 'concurrent'
     },
     harmonograph: Harmonograph()
   },
@@ -19,6 +21,7 @@ const app = new Vue({
   },
   updated: function() {
     console.log(this.settings);
+    if (this.settings.xyLock) this.settings.yFreq = this.settings.xFreq
     this.harmonograph.updateSettings(this.settings);
     this.harmonograph.stopAnimation();
     this.harmonograph.startAnimation();

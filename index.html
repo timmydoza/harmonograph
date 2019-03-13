@@ -26,6 +26,17 @@
           </label>
         </div>
         <div class="control">
+          Rotary type:
+          <label>
+            Concurrent
+            <input type="radio" value="concurrent" v-model="settings.rotaryType" />
+          </label>
+          <label>
+            Countercurrent
+            <input type="radio" value="countercurrent" v-model="settings.rotaryType" />
+          </label>
+        </div>
+        <div class="control">
           <label>
             Lock to Integer
             <input type="checkbox" v-model="settings.integer" />
@@ -33,20 +44,26 @@
         </div>
         <div class="control">
           <label>
+            Lock x/y
+            <input type="checkbox" v-model="settings.xyLock" />
+          </label>
+        </div>
+        <div class="control">
+          <label>
             X Frequency: {{ settings.xFreq }}
-            <input type="range" v-model="settings.xFreq" step="0.01" />
+            <input type="range" v-model="settings.xFreq" v-bind:step="settings.integer ? 1 : 0.01" />
           </label>
         </div>
         <div class="control">
           <label>
             Y Frequency: {{ settings.yFreq }}
-            <input type="range" v-model="settings.yFreq" step="0.01" />
+            <input type="range" v-model="settings.yFreq" v-bind:step="settings.integer ? 1 : 0.01" />
           </label>
         </div>
         <div class="control">
           <label>
             Z Frequency: {{ settings.zFreq }}
-            <input type="range" v-model="settings.zFreq" step="0.01" />
+            <input type="range" v-model="settings.zFreq" v-bind:step="settings.integer ? 1 : 0.01" />
           </label>
         </div>
         <div class="control">
