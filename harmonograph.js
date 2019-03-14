@@ -1,5 +1,5 @@
 function Harmonograph() {
-  let context, size, scale, timer, settings, line;
+  let ctx, size, scale, timer, settings, line;
 
   function update(min, max) {
     let { xFreq, yFreq, zFreq, type, invert, rotaryType } = settings;
@@ -21,23 +21,27 @@ function Harmonograph() {
       return [x, y];
     });
 
-    context.beginPath();
-    line.context(context)(data);
-    context.stroke();
+    ctx.beginPath();
+    line.context(ctx)(data);
+    ctx.stroke();
   }
 
   function init() {
-    context = document.querySelector('canvas').getContext('2d');
-    context.lineWidth = 4;
+    ctx = document.querySelector('canvas').getContext('2d');
     canvasContainer = document.querySelector('.canvasContainer');
     size = window.innerHeight < canvasContainer.offsetWidth ? window.innerHeight : canvasContainer.offsetWidth;
     size -= 40; // Account for padding
 
-    canvas = d3
-      .select('canvas')
-      .attr('width', size)
-      .attr('height', size);
+    const canvas = document.querySelector('canvas');
+    canvas.style.width = size + 'px';
+    canvas.style.height = size + 'px';
 
+    const dpr = window.devicePixelRatio;
+    canvas.width = size * dpr;
+    canvas.height = size * dpr;
+
+    ctx.scale(dpr, dpr);
+    ctx.lineWidth = 1;
     scale = d3
       .scaleLinear()
       .domain([-2, 2])
@@ -50,7 +54,7 @@ function Harmonograph() {
   }
 
   function startAnimation() {
-    context.clearRect(0, 0, size, size);
+    ctx.clearRect(0, 0, size, size);
     let last = 0;
     timer = d3.timer(elapsed => {
       update(last * settings.speed, elapsed * settings.speed + 1);

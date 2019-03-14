@@ -11,7 +11,7 @@ body {
   bottom: 0;
   right: 0;
   width: 300px;
-  background: #ddd;
+  background: #333;
   padding: 1em;
 }
 
@@ -27,4 +27,5 @@ input[type='range'] {
 
 .control {
   padding: 0.4em 0;
+  color: #aaa
 }
