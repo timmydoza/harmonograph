@@ -3,7 +3,7 @@ const app = new Vue({
   data: {
     settings: {
       type: 'rotary',
-      phase: 'closed',
+      phase: 'open',
       rotaryType: 'concurrent',
       integerLock: false,
       xyLock: false,
@@ -14,7 +14,8 @@ const app = new Vue({
       speed: 0.4,
       decay: 0,
       lineWidth: 0.8,
-      size: 1
+      size: 1,
+      darkMode: false
     },
     harmonograph: Harmonograph()
   },

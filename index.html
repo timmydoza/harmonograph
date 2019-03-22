@@ -10,7 +10,7 @@
     <title>Harmonigraph</title>
   </head>
   <body>
-    <div class="container">
+    <div class="container" v-bind:class="{ dark: settings.darkMode }">
       <div class="canvasContainer">
         <canvas></canvas>
       </div>
@@ -56,13 +56,13 @@
         </div>
         <div class="control">
           <label>
-            Lock to Integer
+            Lock to Integer:
             <input type="checkbox" v-model="settings.integerLock" />
           </label>
         </div>
         <div class="control">
           <label>
-            Lock x/y
+            Lock x/y:
             <input type="checkbox" v-model="settings.xyLock" />
           </label>
         </div>
@@ -112,6 +112,12 @@
           <label>
             size: <input type="number" v-model="settings.size" />
             <input type="range" max="2" v-model="settings.size" step="0.01" />
+          </label>
+        </div>
+        <div class="control">
+          <label>
+            Dark Mode:
+            <input type="checkbox" v-model="settings.darkMode" />
           </label>
         </div>
         <a href="https://www.google.com/search?q=rotary+harmonograph" target="_blank" rel="noopener" class="link">
