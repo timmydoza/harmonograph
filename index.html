@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
     <link rel="stylesheet" href="vendor/normalize.css" />
     <link rel="stylesheet" href="style.css" />
     <title>Harmonigraph</title>
@@ -39,7 +40,7 @@
         <div class="control">
           <label>
             Lock to Integer
-            <input type="checkbox" v-model="settings.integer" />
+            <input type="checkbox" v-model="settings.integerLock" />
           </label>
         </div>
         <div class="control">
@@ -51,19 +52,19 @@
         <div class="control">
           <label>
             X Frequency: {{ settings.xFreq }}
-            <input type="range" v-model="settings.xFreq" v-bind:step="settings.integer ? 1 : 0.01" />
+            <input type="range" v-model="settings.xFreq" v-bind:step="settings.integerLock ? 1 : 0.01" />
           </label>
         </div>
         <div class="control">
           <label>
             Y Frequency: {{ settings.yFreq }}
-            <input type="range" v-model="settings.yFreq" v-bind:step="settings.integer ? 1 : 0.01" />
+            <input type="range" v-model="settings.yFreq" v-bind:step="settings.integerLock ? 1 : 0.01" />
           </label>
         </div>
         <div class="control">
           <label>
             Z Frequency: {{ settings.zFreq }}
-            <input type="range" v-model="settings.zFreq" v-bind:step="settings.integer ? 1 : 0.01" />
+            <input type="range" v-model="settings.zFreq" v-bind:step="settings.integerLock ? 1 : 0.01" />
           </label>
         </div>
         <div class="control">

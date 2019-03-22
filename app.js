@@ -6,6 +6,7 @@ const app = new Vue({
       yFreq: 2,
       xyLock: false,
       zFreq: 3.01,
+      integerLock: false,
       invert: false,
       type: 'rotary',
       speed: 0.2,
@@ -19,9 +20,17 @@ const app = new Vue({
     this.harmonograph.updateSettings(this.settings);
     this.harmonograph.startAnimation();
   },
+  watch: {
+    'settings.integerLock': function(integerLock) {
+      if (integerLock) {
+        this.settings.xFreq = Math.round(this.settings.xFreq);
+        this.settings.yFreq = Math.round(this.settings.yFreq);
+        this.settings.zFreq = Math.round(this.settings.zFreq);
+      }
+    }
+  },
   updated: function() {
-    console.log(this.settings);
-    if (this.settings.xyLock) this.settings.yFreq = this.settings.xFreq
+    if (this.settings.xyLock) this.settings.yFreq = this.settings.xFreq;
     this.harmonograph.updateSettings(this.settings);
     this.harmonograph.stopAnimation();
     this.harmonograph.startAnimation();
