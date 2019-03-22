@@ -2,7 +2,7 @@ function Harmonograph() {
   let ctx, size, scale, timer, settings, line;
 
   function update(min, max) {
-    let { xFreq, yFreq, zFreq, type, invert, rotaryType, decay } = settings;
+    let { xFreq, yFreq, zFreq, type, invert, rotaryType, decay, size } = settings;
     const data = d3.range(min, max, 0.1).map(d => {
       const theta = (d / 180) * Math.PI;
       let x = Math.cos(theta * xFreq);
@@ -20,6 +20,10 @@ function Harmonograph() {
 
       x *= (1 - decay * 0.005) ** theta;
       y *= (1 - decay * 0.005) ** theta;
+
+      x *= size - 0.02;
+      y *= size - 0.02;
+
       return [x, y];
     });
 
@@ -32,7 +36,6 @@ function Harmonograph() {
     ctx = document.querySelector('canvas').getContext('2d');
     canvasContainer = document.querySelector('.canvasContainer');
     size = window.innerHeight < canvasContainer.offsetWidth ? window.innerHeight : canvasContainer.offsetWidth;
-    size -= 40; // Account for padding
 
     const canvas = document.querySelector('canvas');
     canvas.style.width = size + 'px';

@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" />
     <link rel="stylesheet" href="vendor/normalize.css" />
     <link rel="stylesheet" href="style.css" />
     <title>Harmonigraph</title>
@@ -17,25 +17,29 @@
       <div class="controlContainer">
         <div class="control">
           Harmonograph Type:
-          <label>
-            Lateral
-            <input type="radio" value="lateral" v-model="settings.type" />
-          </label>
-          <label>
-            Rotary
-            <input type="radio" value="rotary" v-model="settings.type" />
-          </label>
+          <div class="radioGroup">
+            <label>
+              Lateral
+              <input type="radio" value="lateral" v-model="settings.type" />
+            </label>
+            <label>
+              Rotary
+              <input type="radio" value="rotary" v-model="settings.type" />
+            </label>
+          </div>
         </div>
         <div class="control">
           Rotary type:
-          <label>
-            Concurrent
-            <input type="radio" value="concurrent" v-model="settings.rotaryType" />
-          </label>
-          <label>
-            Countercurrent
-            <input type="radio" value="countercurrent" v-model="settings.rotaryType" />
-          </label>
+          <div class="radioGroup">
+            <label>
+              Concurrent
+              <input type="radio" value="concurrent" v-model="settings.rotaryType" />
+            </label>
+            <label>
+              Countercurrent
+              <input type="radio" value="countercurrent" v-model="settings.rotaryType" />
+            </label>
+          </div>
         </div>
         <div class="control">
           <label>
@@ -51,19 +55,19 @@
         </div>
         <div class="control">
           <label>
-            X Frequency: {{ settings.xFreq }}
+            X Frequency: <input type="number" v-model="settings.xFreq" />
             <input type="range" v-model="settings.xFreq" v-bind:step="settings.integerLock ? 1 : 0.01" />
           </label>
         </div>
-        <div class="control">
+        <div class="control" v-bind:class="{ disabled: settings.xyLock }">
           <label>
-            Y Frequency: {{ settings.yFreq }}
+            Y Frequency: <input type="number" v-model="settings.yFreq" />
             <input type="range" v-model="settings.yFreq" v-bind:step="settings.integerLock ? 1 : 0.01" />
           </label>
         </div>
-        <div class="control">
+        <div class="control" v-bind:class="{ disabled: settings.type === 'lateral' }">
           <label>
-            Z Frequency: {{ settings.zFreq }}
+            Z Frequency: <input type="number" v-model="settings.zFreq" />
             <input type="range" v-model="settings.zFreq" v-bind:step="settings.integerLock ? 1 : 0.01" />
           </label>
         </div>
@@ -75,22 +79,31 @@
         </div>
         <div class="control">
           <label>
-            Render Speed: {{ settings.speed }}
+            Render Speed: <input type="number" v-model="settings.speed" />
             <input type="range" v-model="settings.speed" step="0.01" />
           </label>
         </div>
         <div class="control">
           <label>
-            Decay: {{ settings.decay }}
+            Decay: <input type="number" v-model="settings.decay" />
             <input type="range" max="2" v-model="settings.decay" step="0.01" />
           </label>
         </div>
         <div class="control">
           <label>
-            Line Width: {{ settings.lineWidth }}
+            Line Width: <input type="number" v-model="settings.lineWidth" />
             <input type="range" max="3" v-model="settings.lineWidth" step="0.01" />
           </label>
         </div>
+        <div class="control">
+          <label>
+            size: <input type="number" v-model="settings.size" />
+            <input type="range" max="2" v-model="settings.size" step="0.01" />
+          </label>
+        </div>
+        <a href="https://www.google.com/search?q=rotary+harmonograph" target="_blank" rel="noopener" class="link">
+          What is a rotary harmonograph?
+        </a>
       </div>
     </div>
     <script src="vendor/vue.min.js"></script>

@@ -12,7 +12,8 @@ const app = new Vue({
       speed: 0.2,
       decay: 0,
       rotaryType: 'concurrent',
-      lineWidth: 0.8
+      lineWidth: 0.8,
+      size: 1
     },
     harmonograph: Harmonograph()
   },
