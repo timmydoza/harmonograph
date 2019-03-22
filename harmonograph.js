@@ -2,7 +2,7 @@ function Harmonograph() {
   let ctx, size, scale, timer, settings, line;
 
   function update(min, max) {
-    let { xFreq, yFreq, zFreq, type, invert, rotaryType } = settings;
+    let { xFreq, yFreq, zFreq, type, invert, rotaryType, decay } = settings;
     const data = d3.range(min, max, 0.1).map(d => {
       const theta = (d / 180) * Math.PI;
       let x = Math.cos(theta * xFreq);
@@ -18,6 +18,8 @@ function Harmonograph() {
         y += Math.sin(theta * zFreq) / inv;
       }
 
+      x *= (1 - decay * 0.005) ** theta;
+      y *= (1 - decay * 0.005) ** theta;
       return [x, y];
     });
 
@@ -41,7 +43,6 @@ function Harmonograph() {
     canvas.height = size * dpr;
 
     ctx.scale(dpr, dpr);
-    ctx.lineWidth = 1;
     scale = d3
       .scaleLinear()
       .domain([-2, 2])
@@ -55,6 +56,7 @@ function Harmonograph() {
 
   function startAnimation() {
     ctx.clearRect(0, 0, size, size);
+    ctx.lineWidth = settings.lineWidth;
     let last = 0;
     timer = d3.timer(elapsed => {
       update(last * settings.speed, elapsed * settings.speed + 1);

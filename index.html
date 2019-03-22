@@ -82,7 +82,13 @@
         <div class="control">
           <label>
             Decay: {{ settings.decay }}
-            <input type="range" v-model="settings.decay" step="0.01" />
+            <input type="range" max="2" v-model="settings.decay" step="0.01" />
+          </label>
+        </div>
+        <div class="control">
+          <label>
+            Line Width: {{ settings.lineWidth }}
+            <input type="range" max="3" v-model="settings.lineWidth" step="0.01" />
           </label>
         </div>
       </div>
