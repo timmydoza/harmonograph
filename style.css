@@ -51,8 +51,8 @@ body {
   margin: 0.3em 0.5em;
 }
 
-[type='checkbox'],
-[type='radio'] {
+input[type='checkbox'],
+input[type='radio'] {
   vertical-align: middle;
   margin: 0 0.4em;
 }
@@ -67,9 +67,11 @@ input[type='range'] {
   margin: 7px 0;
   background: transparent;
 }
+
 input[type='range']:focus {
   outline: none;
 }
+
 input[type='range']::-webkit-slider-runnable-track {
   width: 100%;
   height: 2px;
@@ -79,6 +81,7 @@ input[type='range']::-webkit-slider-runnable-track {
   border-radius: 0px;
   border: 0px solid #010101;
 }
+
 input[type='range']::-webkit-slider-thumb {
   box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
   border: 1px solid #000000;
@@ -90,9 +93,11 @@ input[type='range']::-webkit-slider-thumb {
   -webkit-appearance: none;
   margin-top: -7px;
 }
+
 input[type='range']:focus::-webkit-slider-runnable-track {
   background: #a2a2a2;
 }
+
 input[type='range']::-moz-range-track {
   width: 100%;
   height: 2px;
@@ -102,6 +107,7 @@ input[type='range']::-moz-range-track {
   border-radius: 0px;
   border: 0px solid #010101;
 }
+
 input[type='range']::-moz-range-thumb {
   box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
   border: 1px solid #000000;
@@ -111,6 +117,7 @@ input[type='range']::-moz-range-thumb {
   background: #ffffff;
   cursor: pointer;
 }
+
 input[type='range']::-ms-track {
   width: 100%;
   height: 2px;
@@ -119,18 +126,21 @@ input[type='range']::-ms-track {
   border-color: transparent;
   color: transparent;
 }
+
 input[type='range']::-ms-fill-lower {
   background: #848484;
   border: 0px solid #010101;
   border-radius: 0px;
   box-shadow: 1px 1px 1px rgba(0, 0, 0, 0), 0px 0px 1px rgba(13, 13, 13, 0);
 }
+
 input[type='range']::-ms-fill-upper {
   background: #939393;
   border: 0px solid #010101;
   border-radius: 0px;
   box-shadow: 1px 1px 1px rgba(0, 0, 0, 0), 0px 0px 1px rgba(13, 13, 13, 0);
 }
+
 input[type='range']::-ms-thumb {
   box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
   border: 1px solid #000000;
@@ -141,9 +151,11 @@ input[type='range']::-ms-thumb {
   cursor: pointer;
   height: 2px;
 }
+
 input[type='range']:focus::-ms-fill-lower {
   background: #939393;
 }
+
 input[type='range']:focus::-ms-fill-upper {
   background: #a2a2a2;
 }

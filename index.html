@@ -29,6 +29,19 @@
           </div>
         </div>
         <div class="control">
+          Phase Type:
+          <div class="radioGroup">
+            <label>
+              Open
+              <input type="radio" value="open" v-model="settings.phase" />
+            </label>
+            <label>
+              Closed
+              <input type="radio" value="closed" v-model="settings.phase" />
+            </label>
+          </div>
+        </div>
+        <div class="control">
           Rotary type:
           <div class="radioGroup">
             <label>
@@ -67,8 +80,8 @@
         </div>
         <div class="control" v-bind:class="{ disabled: settings.type === 'lateral' }">
           <label>
-            Z Frequency: <input type="number" v-model="settings.zFreq" />
-            <input type="range" v-model="settings.zFreq" v-bind:step="settings.integerLock ? 1 : 0.01" />
+            Rotary Frequency: <input type="number" v-model="settings.rotaryFreq" />
+            <input type="range" v-model="settings.rotaryFreq" v-bind:step="settings.integerLock ? 1 : 0.01" />
           </label>
         </div>
         <div class="control">

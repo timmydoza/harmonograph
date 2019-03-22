@@ -1,38 +1,8 @@
 function Harmonograph() {
   let ctx, size, scale, timer, settings, line;
 
-  function update(min, max) {
-    let { xFreq, yFreq, zFreq, type, invert, rotaryType, decay, size } = settings;
-    const data = d3.range(min, max, 0.1).map(d => {
-      const theta = (d / 180) * Math.PI;
-      let x = Math.cos(theta * xFreq);
-      let y = Math.sin(theta * yFreq);
-
-      if (type === 'rotary') {
-        let inv = invert ? zFreq : 1;
-        if (rotaryType === 'countercurrent') {
-          x -= Math.cos(theta * zFreq) / inv;
-        } else {
-          x += Math.cos(theta * zFreq) / inv;
-        }
-        y += Math.sin(theta * zFreq) / inv;
-      }
-
-      x *= (1 - decay * 0.005) ** theta;
-      y *= (1 - decay * 0.005) ** theta;
-
-      x *= size - 0.02;
-      y *= size - 0.02;
-
-      return [x, y];
-    });
-
-    ctx.beginPath();
-    line.context(ctx)(data);
-    ctx.stroke();
-  }
-
-  function init() {
+  function init(_settings) {
+    settings = _settings;
     ctx = document.querySelector('canvas').getContext('2d');
     canvasContainer = document.querySelector('.canvasContainer');
     size = window.innerHeight < canvasContainer.offsetWidth ? window.innerHeight : canvasContainer.offsetWidth;
@@ -57,7 +27,36 @@ function Harmonograph() {
       .y(d => scale(d[1]));
   }
 
+  function update(min, max) {
+    let { xFreq, yFreq, rotaryFreq, type, invert, rotaryType, decay, size, phase } = settings;
+    const data = d3.range(min, max, 0.1).map(d => {
+      const theta = (d / 180) * Math.PI;
+
+      let x = Math[phase === 'open' ? 'sin' : 'cos'](theta * xFreq);
+      let y = Math.sin(theta * yFreq);
+
+      if (type === 'rotary') {
+        let inv = invert ? rotaryFreq : 1;
+        x += (Math.cos(theta * rotaryFreq) / inv) * (rotaryType === 'countercurrent' ? -1 : 1);
+        y += Math.sin(theta * rotaryFreq) / inv;
+      }
+
+      x *= (1 - decay * 0.005) ** theta;
+      y *= (1 - decay * 0.005) ** theta;
+
+      x *= size - 0.02;
+      y *= size - 0.02;
+
+      return [x, y];
+    });
+
+    ctx.beginPath();
+    line.context(ctx)(data);
+    ctx.stroke();
+  }
+
   function startAnimation() {
+    timer && timer.stop();
     ctx.clearRect(0, 0, size, size);
     ctx.lineWidth = settings.lineWidth;
     let last = 0;
@@ -67,13 +66,5 @@ function Harmonograph() {
     });
   }
 
-  function stopAnimation() {
-    timer && timer.stop();
-  }
-
-  function updateSettings(_) {
-    settings = _;
-  }
-
-  return { init, startAnimation, stopAnimation, updateSettings };
+  return { init, startAnimation };
 }
