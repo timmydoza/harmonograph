@@ -28,15 +28,16 @@ function Harmonograph() {
   }
 
   function update(min, max) {
-    let { xFreq, yFreq, rotaryFreq, type, invert, rotaryType, decay, size, phase } = settings;
-    const data = d3.range(min, max, 0.1).map(d => {
+    let { xFreq, yFreq, rotaryFreq, type, invert, rotaryType, decay, size, phase, speed } = settings;
+    let inv = invert ? rotaryFreq : 1;
+    const range = d3.range(min, max, 0.5);
+    const data = range.map(d => {
       const theta = (d / 180) * Math.PI;
 
       let x = Math[phase === 'open' ? 'cos' : 'sin'](theta * xFreq);
       let y = Math.sin(theta * yFreq);
 
       if (type === 'rotary') {
-        let inv = invert ? rotaryFreq : 1;
         x += (Math.cos(theta * rotaryFreq) / inv) * (rotaryType === 'countercurrent' ? -1 : 1);
         y += Math.sin(theta * rotaryFreq) / inv;
       }
@@ -53,6 +54,8 @@ function Harmonograph() {
     ctx.beginPath();
     line.context(ctx)(data);
     ctx.stroke();
+
+    return range[range.length - 1];
   }
 
   function startAnimation() {
@@ -61,9 +64,8 @@ function Harmonograph() {
     ctx.lineWidth = settings.lineWidth;
     ctx.strokeStyle = settings.darkMode ? '#fff' : '#000';
     let last = 0;
-    timer = d3.timer(elapsed => {
-      update(last * settings.speed, elapsed * settings.speed + 1);
-      last = elapsed;
+    timer = window.t = d3.timer(elapsed => {
+      last = update(last, elapsed * settings.speed);
     });
   }
 

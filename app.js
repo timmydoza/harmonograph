@@ -11,7 +11,7 @@ const app = new Vue({
       yFreq: 2,
       rotaryFreq: 3.02,
       invert: false,
-      speed: 0.4,
+      speed: 0.5,
       decay: 0,
       lineWidth: 0.8,
       size: 1,
