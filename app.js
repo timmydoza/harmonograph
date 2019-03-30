@@ -13,6 +13,7 @@ const app = new Vue({
       invert: false,
       speed: 0.5,
       decay: 0,
+      fade: 0,
       lineWidth: 0.8,
       size: 1,
       darkMode: false
@@ -34,6 +35,13 @@ const app = new Vue({
   },
   updated: function() {
     if (this.settings.xyLock) this.settings.yFreq = this.settings.xFreq;
+    this.harmonograph.applySettings(this.settings);
     this.harmonograph.startAnimation();
+    console.log(this.settings);
+  },
+  methods: {
+    randomize: function() {
+      this.settings = presets[Math.floor(Math.random() * presets.length)];
+    }
   }
 });

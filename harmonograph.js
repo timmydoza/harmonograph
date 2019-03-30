@@ -28,7 +28,7 @@ function Harmonograph() {
   }
 
   function update(min, max) {
-    let { xFreq, yFreq, rotaryFreq, type, invert, rotaryType, decay, size, phase, speed } = settings;
+    let { xFreq, yFreq, rotaryFreq, type, invert, rotaryType, decay, size, phase, fade } = settings;
     let inv = invert ? rotaryFreq : 1;
     const range = d3.range(min, max, 0.5);
     const data = range.map(d => {
@@ -51,6 +51,7 @@ function Harmonograph() {
       return [x, y];
     });
 
+    ctx.lineWidth = settings.lineWidth * (1 - fade * 0.0001) ** min;
     ctx.beginPath();
     line.context(ctx)(data);
     ctx.stroke();
@@ -61,7 +62,6 @@ function Harmonograph() {
   function startAnimation() {
     timer && timer.stop();
     ctx.clearRect(0, 0, size, size);
-    ctx.lineWidth = settings.lineWidth;
     ctx.strokeStyle = settings.darkMode ? '#fff' : '#000';
     let last = 0;
     timer = window.t = d3.timer(elapsed => {
@@ -69,5 +69,9 @@ function Harmonograph() {
     });
   }
 
-  return { init, startAnimation };
+  function applySettings(_) {
+    settings = _;
+  }
+
+  return { init, startAnimation, applySettings };
 }

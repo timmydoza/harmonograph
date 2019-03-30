@@ -104,13 +104,19 @@
         </div>
         <div class="control">
           <label>
+            Fade: <input type="number" v-model="settings.fade" />
+            <input type="range" max="2" v-model="settings.fade" step="0.01" />
+          </label>
+        </div>
+        <div class="control">
+          <label>
             Line Width: <input type="number" v-model="settings.lineWidth" />
             <input type="range" max="3" v-model="settings.lineWidth" step="0.01" />
           </label>
         </div>
         <div class="control">
           <label>
-            size: <input type="number" v-model="settings.size" />
+            Size: <input type="number" v-model="settings.size" />
             <input type="range" max="2" v-model="settings.size" step="0.01" />
           </label>
         </div>
@@ -123,11 +129,13 @@
         <a href="https://www.google.com/search?q=rotary+harmonograph" target="_blank" rel="noopener" class="link">
           What is a rotary harmonograph?
         </a>
+        <button v-on:click="randomize">Randomize</button>
       </div>
     </div>
     <script src="vendor/vue.min.js"></script>
     <script src="vendor/d3.min.js"></script>
     <script src="harmonograph.js"></script>
+    <script src="presets.js"></script>
     <script src="app.js"></script>
   </body>
 </html>
