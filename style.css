@@ -38,7 +38,8 @@ body {
   width: 300px;
   background: #333;
   padding: 1em;
-  font-size: calc(0.45rem + 0.43vw)
+  font-size: calc(0.45rem + 0.43vw);
+  overflow-y: auto;
 }
 
 .canvasContainer {
