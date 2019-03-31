@@ -31,6 +31,9 @@ const app = new Vue({
         this.settings.yFreq = Math.round(this.settings.yFreq);
         this.settings.rotaryFreq = Math.round(this.settings.rotaryFreq);
       }
+    },
+    'settings.darkMode': function(darkMode) {
+      document.querySelector('body').classList[darkMode ? 'add' : 'remove']('dark')
     }
   },
   updated: function() {
@@ -41,7 +44,11 @@ const app = new Vue({
   },
   methods: {
     randomize: function() {
-      this.settings = presets[Math.floor(Math.random() * presets.length)];
+      this.settings = {
+        ...this.settings,
+        ...presets[Math.floor(Math.random() * presets.length)],
+        darkMode: !Math.round(Math.random())
+      }
     }
   }
 });
