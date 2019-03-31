@@ -21,6 +21,7 @@ const app = new Vue({
     harmonograph: Harmonograph()
   },
   mounted: function() {
+    this.randomize();
     this.harmonograph.init(this.settings);
     this.harmonograph.startAnimation();
   },
@@ -33,7 +34,7 @@ const app = new Vue({
       }
     },
     'settings.darkMode': function(darkMode) {
-      document.querySelector('body').classList[darkMode ? 'add' : 'remove']('dark')
+      document.querySelector('body').classList[darkMode ? 'add' : 'remove']('dark');
     }
   },
   updated: function() {
@@ -48,7 +49,7 @@ const app = new Vue({
         ...this.settings,
         ...presets[Math.floor(Math.random() * presets.length)],
         darkMode: !Math.round(Math.random())
-      }
+      };
     }
   }
 });

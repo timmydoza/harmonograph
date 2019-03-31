@@ -292,5 +292,19 @@ const presets = [
     fade: '0.2',
     lineWidth: 0.8,
     size: '1.48'
+  },
+  {
+    type: 'rotary',
+    phase: 'closed',
+    rotaryType: 'concurrent',
+    xFreq: '1',
+    yFreq: '1',
+    rotaryFreq: '1.0005',
+    invert: false,
+    speed: '100',
+    decay: 0,
+    fade: '0.02',
+    lineWidth: '0.12',
+    size: 1
   }
 ];
