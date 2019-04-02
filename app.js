@@ -31,6 +31,7 @@ const app = new Vue({
         this.settings.xFreq = Math.round(this.settings.xFreq);
         this.settings.yFreq = Math.round(this.settings.yFreq);
         this.settings.rotaryFreq = Math.round(this.settings.rotaryFreq);
+        this.settings.rotaryAmp = Math.round(this.settings.rotaryAmp);
       }
     },
     'settings.darkMode': function(darkMode) {
@@ -41,7 +42,6 @@ const app = new Vue({
     if (this.settings.xyLock) this.settings.yFreq = this.settings.xFreq;
     this.harmonograph.applySettings(this.settings);
     this.harmonograph.startAnimation();
-    console.log(this.settings);
   },
   methods: {
     randomize: function() {
