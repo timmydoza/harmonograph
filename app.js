@@ -10,7 +10,7 @@ const app = new Vue({
       xFreq: 2,
       yFreq: 2,
       rotaryFreq: 3.02,
-      invert: false,
+      rotaryAmp: 1,
       speed: 0.5,
       decay: 0,
       fade: 0,

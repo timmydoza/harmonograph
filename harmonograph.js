@@ -28,8 +28,7 @@ function Harmonograph() {
   }
 
   function update(min, max) {
-    let { xFreq, yFreq, rotaryFreq, type, invert, rotaryType, decay, size, phase, fade } = settings;
-    let inv = invert ? rotaryFreq : 1;
+    let { xFreq, yFreq, rotaryFreq, type, xyAmp, rotaryAmp, rotaryType, decay, size, phase, fade } = settings;
     const range = d3.range(min, max, 0.5);
     const data = range.map(d => {
       const theta = (d / 180) * Math.PI;
@@ -38,8 +37,8 @@ function Harmonograph() {
       let y = Math.sin(theta * yFreq);
 
       if (type === 'rotary') {
-        x += (Math.cos(theta * rotaryFreq) / inv) * (rotaryType === 'countercurrent' ? -1 : 1);
-        y += Math.sin(theta * rotaryFreq) / inv;
+        x += Math.cos(theta * rotaryFreq) * rotaryAmp * (rotaryType === 'countercurrent' ? -1 : 1);
+        y += Math.sin(theta * rotaryFreq) * rotaryAmp;
       }
 
       x *= (1 - decay * 0.005) ** theta;

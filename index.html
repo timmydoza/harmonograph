@@ -7,7 +7,7 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" />
     <link rel="stylesheet" href="vendor/normalize.css" />
     <link rel="stylesheet" href="style.css" />
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
     <title>Harmonograph</title>
   </head>
   <body>
@@ -76,19 +76,35 @@
         <div class="control" v-bind:class="{ disabled: settings.xyLock }">
           <label>
             Y Frequency: <input type="number" v-model="settings.yFreq" />
-            <input type="range" v-model="settings.yFreq" v-bind:step="settings.integerLock ? 1 : 0.01" />
+            <input
+              type="range"
+              v-model="settings.yFreq"
+              v-bind:step="settings.integerLock ? 1 : 0.01"
+              v-bind:disabled="settings.xyLock"
+            />
           </label>
         </div>
         <div class="control" v-bind:class="{ disabled: settings.type === 'lateral' }">
           <label>
             Rotary Frequency: <input type="number" v-model="settings.rotaryFreq" />
-            <input type="range" v-model="settings.rotaryFreq" v-bind:step="settings.integerLock ? 1 : 0.01" />
+            <input
+              type="range"
+              v-model="settings.rotaryFreq"
+              v-bind:step="settings.integerLock ? 1 : 0.01"
+              v-bind:disabled="settings.type === 'lateral'"
+            />
           </label>
         </div>
-        <div class="control">
+        <div class="control" v-bind:class="{ disabled: settings.type === 'lateral' }">
           <label>
-            Invert Rotary Amplitude
-            <input type="checkbox" v-model="settings.invert" />
+            Rotary Amplitude: <input type="number" v-model="settings.rotaryAmp" />
+            <input
+              type="range"
+              max="3"
+              v-model="settings.rotaryAmp"
+              v-bind:step="settings.integerLock ? 1 : 0.01"
+              v-bind:disabled="settings.type === 'lateral'"
+            />
           </label>
         </div>
         <div class="control">
