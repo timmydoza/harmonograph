@@ -18,6 +18,7 @@ const app = new Vue({
       size: 1,
       darkMode: false
     },
+    preset: Math.floor(Math.random() * presets.length),
     harmonograph: Harmonograph()
   },
   mounted: function() {
@@ -47,7 +48,7 @@ const app = new Vue({
     randomize: function() {
       this.settings = {
         ...this.settings,
-        ...presets[Math.floor(Math.random() * presets.length)],
+        ...presets[this.preset++ % presets.length],
         darkMode: !Math.round(Math.random())
       };
     }
