@@ -70,7 +70,7 @@
         <div class="control">
           <label>
             X Frequency: <input type="number" v-model="settings.xFreq" />
-            <input type="range" v-model="settings.xFreq" v-bind:step="settings.integerLock ? 1 : 0.01" />
+            <input type="range" max="15" v-model="settings.xFreq" v-bind:step="settings.integerLock ? 1 : 0.01" />
           </label>
         </div>
         <div class="control" v-bind:class="{ disabled: settings.xyLock }">
@@ -78,6 +78,7 @@
             Y Frequency: <input type="number" v-model="settings.yFreq" />
             <input
               type="range"
+              max="15"
               v-model="settings.yFreq"
               v-bind:step="settings.integerLock ? 1 : 0.01"
               v-bind:disabled="settings.xyLock"
@@ -89,6 +90,7 @@
             Rotary Frequency: <input type="number" v-model="settings.rotaryFreq" />
             <input
               type="range"
+              max="15"
               v-model="settings.rotaryFreq"
               v-bind:step="settings.integerLock ? 1 : 0.01"
               v-bind:disabled="settings.type === 'lateral'"
