@@ -25,6 +25,10 @@ const app = new Vue({
     this.randomize();
     this.harmonograph.init(this.settings);
     this.harmonograph.startAnimation();
+    window.addEventListener('resize', () => {
+      this.harmonograph.init(this.settings);
+      this.harmonograph.startAnimation();
+    });
   },
   watch: {
     'settings.integerLock': function(integerLock) {
