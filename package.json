@@ -1,6 +1,6 @@
 {
   "name": "harmonograph",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A rotary harmonograph",
   "main": "index.js",
   "scripts": {
@@ -10,8 +10,7 @@
   "keywords": [],
   "author": "",
   "license": "MIT",
-  "dependencies": {},
   "devDependencies": {
-    "reload": "^2.4.0"
+    "reload": "^3.3.0"
   }
 }

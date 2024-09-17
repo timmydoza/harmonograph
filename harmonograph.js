@@ -55,7 +55,7 @@ function Harmonograph() {
     line.context(ctx)(data);
     ctx.stroke();
 
-    return range[range.length - 1];
+    return range[range.length - 1] || 0;
   }
 
   function startAnimation() {
